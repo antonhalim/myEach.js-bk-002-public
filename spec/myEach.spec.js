@@ -5,16 +5,14 @@ describe('myEach', function() {
   var myEach;
   beforeEach(function() {
     myEach = require('../lib/myEach');
-    foo = {
-      work: function(value) {
-      }
-    };
-
-    spyOn(foo, 'setBar');
   });
 
   it('should call the function three times with each element of the array', function() {
-    myEach([1,2,3], work);
-    expect(foo.work.calls.count()).toEqual(3);
+    spyOn(console, 'log');
+
+    myEach([1,2,3], function(e) {console.log(e)});
+    expect(console.log).toHaveBeenCalledWith(1);
+    expect(console.log).toHaveBeenCalledWith(2);
+    expect(console.log).toHaveBeenCalledWith(3);
   });
 });
